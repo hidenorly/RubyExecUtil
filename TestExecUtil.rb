@@ -10,6 +10,7 @@ class TestExecUtil < Minitest::Test
 
 	def test_execCmd
 		puts "test_execCmd"
-		assert_equal true, ExecUtil.execCmd("/bin/sh -c echo")
+		assert_equal true, ExecUtil.execCmd("/bin/sh -c 'echo !test_execCmd'")
+		assert_equal true, ExecUtil.execCmd("/bin/sh -c 'echo !test_execCmd'", ".", false)
 	end
 end
