@@ -19,4 +19,10 @@ class TestExecUtil < Minitest::Test
 		assert_equal true, ExecUtil.hasResult?("/bin/sh -c 'echo !test_hasResult'")
 		assert_equal false, ExecUtil.hasResult?("/bin/sh -c ''")
 	end
+
+	def test_getExecResultEachLine
+		puts "test_getExecResultEachLine"
+		assert_equal ["Ok"], ExecUtil.getExecResultEachLine("/bin/sh -c 'echo Ok'")
+		assert_equal ["1", "2"], ExecUtil.getExecResultEachLine("/bin/sh -c 'echo \"1\"; echo \"2\"'")
+	end
 end
