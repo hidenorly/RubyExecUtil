@@ -28,4 +28,12 @@ class TestExecUtil < Minitest::Test
 		assert_equal ["Ok"], ExecUtil.getExecResultEachLine("#{@shPath} -c 'echo Ok'")
 		assert_equal ["1", "2"], ExecUtil.getExecResultEachLine("#{@shPath} -c 'echo \"1\"; echo \"2\"'")
 	end
+
+	def test_getExecResultEachLineWithTimeout
+		puts "test_getExecResultEachLineWithTimeout"
+		assert_equal ["Ok"], ExecUtil.getExecResultEachLineWithTimeout("#{@shPath} -c 'echo Ok'")
+		assert_equal ["Ok"], ExecUtil.getExecResultEachLineWithTimeout("#{@shPath} -c 'echo Ok'", ".", 1)
+		assert_equal [], ExecUtil.getExecResultEachLineWithTimeout("#{@shPath} -c 'sleep 2; echo Ok'", ".", 1)
+		assert_equal ["Ok"], ExecUtil.getExecResultEachLineWithTimeout("#{@shPath} -c 'sleep 1; echo Ok'", ".", 2)
+	end
 end
