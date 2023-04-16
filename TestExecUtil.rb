@@ -17,6 +17,15 @@ class TestExecUtil < Minitest::Test
 		assert_equal true, ExecUtil.execCmd("#{@shPath} -c 'echo !test_execCmd'", ".", false)
 	end
 
+	def test_spawn
+		puts "test_spawn"
+		pid = ExecUtil.spawn("du -ak", "/")
+		assert_equal true, pid!=nil
+		assert_equal true, ExecUtil.pid_exists?(pid)
+		assert_equal true, ExecUtil.killProces(pid)
+		assert_equal false, ExecUtil.pid_exists?(pid)
+	end
+
 	def test_hasResult
 		puts "test_hasResult"
 		assert_equal true, ExecUtil.hasResult?("#{@shPath} -c 'echo !test_hasResult'")
