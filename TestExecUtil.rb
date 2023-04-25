@@ -21,8 +21,10 @@ class TestExecUtil < Minitest::Test
 		puts "test_spawn"
 		pid = ExecUtil.spawn("du -ak", "/")
 		assert_equal true, pid!=nil
+		assert_equal true, ExecUtil.processExists?(pid)
 		assert_equal true, ExecUtil.pid_exists?(pid)
 		assert_equal true, ExecUtil.killProces(pid)
+		assert_equal false, ExecUtil.processExists?(pid)
 		assert_equal false, ExecUtil.pid_exists?(pid)
 	end
 
